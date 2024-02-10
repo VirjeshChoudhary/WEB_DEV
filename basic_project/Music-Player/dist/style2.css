@@ -1,0 +1,14 @@
+.song-item{
+    border: 1px solid black;
+    width: 60%;
+    margin: 10px auto;
+    padding: 5px 0;
+    border-radius: 20px;
+    cursor: pointer;
+    list-style: none;
+}
+
+
+.song-item:hover{
+   background-color: rgb(169, 181, 193);
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body >
+    <div id="container" class="bg-purple-500 rounded-md h-[30rem] w-[40%] text-center mx-auto mt-[5rem]">
+
+        <div>
+            <div class="text-[2.5rem] font-medium">Music Player</div>
+            <ul id="song-list" class="h-[20rem]">
+                
+            </ul>
+        </div>
+        <div id="play-section" class="flex flex-col text-center ">
+            <input id="progress" class="w-[70%] text-center mx-auto" type="range" value="0">
+            
+            <div id="sam" class="mt-2 text-[1.25rem] flex justify-center gap-7">
+                <button id="backward"><i class="fa-solid fa-backward"></i></button>
+            <button id="play-btn"><i class="fa-solid fa-play"></i></button>
+            <button id="forward"><i class="fa-solid fa-forward"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/935e955d3a.js" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+</body>
+</html>
