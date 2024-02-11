@@ -1,0 +1,14 @@
+figure{ border: 2px solid black;
+        box-sizing: border-box;
+        box-sizing: content-box;
+        width: 220px;
+        text-align: center;
+      }
+      figure:hover{
+        cursor: pointer;
+      }
+img{
+    width: 200px;
+    height: 250px;
+    margin: 10px;
+}
