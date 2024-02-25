@@ -16,16 +16,16 @@ router.post('/register',async(req,res)=>{
 router.get('/login',(req,res)=>{
     res.render('auth/login')
 })
+
 router.post('/login',
-  passport.authenticate('local',{ 
-    failureRedirect: '/login', failureMessage: true
- }),
-  function(req, res) {
-    
-    req.flash('success' , `Welcome back in CelestialCart`);
-    res.redirect('/products');
-  });
-  router.get('/logout' , (req,res)=>{
+   passport.authenticate('local',{ 
+   failureRedirect: '/login', failureMessage: true
+   }),(req, res)=>{
+   req.flash('success' , `Welcome back in CelestialCart`);
+   res.redirect('/products'); 
+});
+
+router.get('/logout' , (req,res)=>{
     req.logout(()=>{
         req.flash('success' , 'Logged out successfully')
         res.redirect('/login');
