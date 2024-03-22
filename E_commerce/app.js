@@ -12,11 +12,17 @@ const authRoutes = require("./routes/auth");
 const passport = require('passport'); //pass
 const LocalStrategy = require('passport-local'); //pass
 const User = require('./models/User'); //pass
+const productApi = require('./routes/api/productapi');
 let configsession={
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
     // cookie: { secure: true }
+    cookie:{
+        httpOnly:true , 
+        expires : Date.now() + 7*24*60*60*1000,
+        maxAge: 7*24*60*60*1000
+    }
   }
 
 
@@ -39,24 +45,30 @@ app.use(methodOverride('_method'))
 
 app.use(session(configsession));
 app.use(flash());
+
+// all are use for passport remember all this stuff
+app.use(passport.initialize()); //pass
+app.use(passport.session()); //pass
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+// use static authenticate method of model in LocalStrategy
+passport.use(new LocalStrategy(User.authenticate()));
+// iske baad he aayega
 app.use((req,res,next)=>{
+    res.locals.currentUser=req.user;
+    // console.log(req.user);
     res.locals.success=req.flash('success');
     res.locals.error=req.flash('error');
     next();
 })
-// all are use for passport remember all this stuff
-app.use(passport.initialize()); //pass
-app.use(passport.session()); //pass
-// use static authenticate method of model in LocalStrategy
-passport.use(new LocalStrategy(User.authenticate()));
 
-// use static serialize and deserialize of model for passport session support
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+
 
 app.use(productRoutes);
 app.use(reviewRoutes);
 app.use(authRoutes);
+app.use(productApi);
 
 const PORT = 8080;
 app.listen(PORT , ()=>{

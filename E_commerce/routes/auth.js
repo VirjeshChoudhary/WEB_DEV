@@ -4,14 +4,16 @@ const passport = require('passport');
 const router = express.Router(); 
 
 router.get('/register',(req,res)=>{
+    
     res.render('auth/signup')
 })
 router.post('/register',async(req,res)=>{
-    let {username,password,email,gender}=req.body;
-    let user=new User({username,email,gender});
+    let {username,password,email,gender,role}=req.body;
+    let user=new User({username,email,gender,role});
     let newUser=await User.register(user,password);
-    req.flash('success' , `Welcome to CelestialCart ${username}`);
-    res.redirect('/products');
+    // req.flash('success' , `Welcome to CelestialCart ${username}`);
+    
+    res.redirect('/login');
 });
 router.get('/login',(req,res)=>{
     res.render('auth/login')
@@ -21,7 +23,7 @@ router.post('/login',
    passport.authenticate('local',{ 
    failureRedirect: '/login', failureMessage: true
    }),(req, res)=>{
-   req.flash('success' , `Welcome back in CelestialCart`);
+   req.flash('success' , `Welcome  ${req.user.username} in CelestialCart`);
    res.redirect('/products'); 
 });
 

@@ -1,3 +1,4 @@
+const Product = require('./models/Product');
 const {productSchema , reviewSchema} = require('./schema')
 
 
@@ -21,5 +22,43 @@ const validateReview = (req,res,next)=>{
     next();
 }
 
+const isLoggedin = (req,res,next)=>{
+   
+    if(req.xhr && !req.isAuthenticated()){
+        return res.status(401).send('unauthorised');
+        // console.log(req.xhr);//ajax hai ya nhi hai?
+    }
+   if(!req.isAuthenticated()){
+       req.flash("error","You need to login first");
+       return res.redirect('/login');
+   }
+   next();
+}
+const isSeller = (req,res,next)=>{
+// let {id}=req.params;
+   if(!req.user.role){
+    req.flash("error","You do not have a permission");
+    
+    return res.redirect('/products')
+   }
+   else if(req.user.role!=="seller"){
+    req.flash("error","You do not have a permission");
+    // return res.redirect(`/products/${id}`) --> yeh krnw hum new nahi bna paayengey bcz new ke liye koi id nhi hoti
+    return res.redirect(`/products`)
+   }
+   next();
+}
 
-module.exports = {validateProduct , validateReview}
+const isProductAuthor = async (req,res,next)=>{
+    let {id}=req.params;
+    let product=await Product.findById(id);
+    if(!product.author.equals(req.user._id)){ 
+        req.flash('error' , 'You are not the owner of this product');
+        return res.redirect(`/products/${id}`)        
+    }
+    next();
+ }
+
+
+module.exports = {validateProduct , validateReview ,isLoggedin,isSeller,isProductAuthor}
+

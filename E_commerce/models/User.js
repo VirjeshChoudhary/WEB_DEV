@@ -8,11 +8,21 @@ const userSchema = new mongoose.Schema({
         trim:true,
         required:true
     },
+    role:{
+        type:String,
+        default:"buyer"
+    },
     gender:{
         type:String,
         trim:true,
         required:true
-    }
+    },
+    wishlist:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Product'
+        }
+    ]
 })
 userSchema.plugin(passportLocalMongoose);
 

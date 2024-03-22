@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="input.css">
+    <title>Document</title>
+</head>
+<body class="bg-[#222] text-white">
+    <div class="card text-center bg-gradient-to-r from-purple-500 to-pink-500 w-[40rem] mx-auto mt-16 rounded-md flex flex-col justify-center py-11">
+        <div class="search  p-5 flex justify-center">
+            <input class="h-14 text-center text-black rounded-3xl w-72" type="text" placeholder="Enter the city name" spellcheck="false">
+            <button class="btn"><img class="h-8 pl-4" src="./assests/images/search.png" alt=""></button>
+        </div>
+        <div class="error text-left ml-[160px] font-normal text-lg hidden">
+            <p>Invalid city name</p>
+        </div>
+        <div class="weather mx-auto w-[80%] pt-4 pb-10 hidden">
+            <img class="weather-icon text-center mx-auto" src="./assests/images/rain.png" alt="">
+            <h1 class="temp text-6xl font-bold">22°C</h1>
+            <h2 class="city text-6xl font-normal">New York</h2>
+            <div class="details flex justify-between pt-6">
+                <div class="col flex justify-center items-center">
+                    <img class="h-12" src="./assests/images/humidity.png" alt="">
+                    <div class="text-left pl-4">
+                        <p class="humidity text-[28px]">50%</p>
+                        <p class="text-[20px]">Humidity</p>
+                    </div>
+                </div>
+                <div class="col flex justify-center items-center">
+                    <img class="h-14" src="./assests/images/wind.png" alt="">
+                    <div class="text-left pl-4">
+                        <p class="wind text-[28px]">15 km/h</p>
+                        <p class="text-[20px] pl-2">Wind</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
