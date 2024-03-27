@@ -13,6 +13,7 @@ const passport = require('passport'); //pass
 const LocalStrategy = require('passport-local'); //pass
 const User = require('./models/User'); //pass
 const productApi = require('./routes/api/productapi');
+const cartRoutes = require("./routes/cart");
 let configsession={
     secret: 'keyboard cat',
     resave: false,
@@ -63,12 +64,15 @@ app.use((req,res,next)=>{
     next();
 })
 
-
+app.get('/',(req,res)=>{
+    res.render('home');
+})
 
 app.use(productRoutes);
 app.use(reviewRoutes);
 app.use(authRoutes);
 app.use(productApi);
+app.use(cartRoutes)
 
 const PORT = 8080;
 app.listen(PORT , ()=>{
