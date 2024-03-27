@@ -37,6 +37,13 @@ router.get('/checkout',async(req,res)=>{
       res.redirect(303, session.url);
 })
 
+router.delete('/user/:id',async(req,res)=>{
+  let {id}=req.params;
+  await User.findByIdAndDelete(id,{$pull:{cart:id}});
+  req.flash('success',"cart item successfully removed");
+  res.redirect(`/user/${id}/add`)
+})
+
 router.post("/user/:productId/add",isLoggedin,async(req,res)=>{
     let {productId}=req.params;
     let userId=req.user._id;
@@ -46,6 +53,7 @@ router.post("/user/:productId/add",isLoggedin,async(req,res)=>{
     await user.save();
     res.redirect('/user/cart');
 })
+
 
 module.exports = router;
 

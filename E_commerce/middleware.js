@@ -1,4 +1,5 @@
 const Product = require('./models/Product');
+const Review = require('./models/Review');
 const {productSchema , reviewSchema} = require('./schema')
 
 
@@ -58,6 +59,15 @@ const isProductAuthor = async (req,res,next)=>{
     }
     next();
  }
+//  const isReviewAuthor = async (req,res,next)=>{
+//     let {id}=req.params;
+//     let review=await Review.findById(id);
+//     if(!review.author.equals(req.user._id)){ 
+//         req.flash('error' , 'You are not the owner of this product');
+//         return res.redirect(`/products/${id}`)        
+//     }
+//     next();
+//  }
 
 
 module.exports = {validateProduct , validateReview ,isLoggedin,isSeller,isProductAuthor}

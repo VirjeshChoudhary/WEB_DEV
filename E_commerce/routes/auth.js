@@ -23,8 +23,14 @@ router.post('/login',
    passport.authenticate('local',{ 
    failureRedirect: '/login', failureMessage: true
    }),(req, res)=>{
-   req.flash('success' , `Welcome  ${req.user.username} in CelestialCart`);
-   res.redirect('/products'); 
+   try {
+    req.flash('success' , `Welcome  ${req.user.username} in CelestialCart`);
+    res.redirect('/products'); 
+   
+   } catch(e){
+    res.status(500).render('error' , {err:e.message});
+}
+   
 });
 
 router.get('/logout' , (req,res)=>{
@@ -33,11 +39,6 @@ router.get('/logout' , (req,res)=>{
         res.redirect('/login');
     });
 })
-
-
-
-
-
 
 
 module.exports = router;

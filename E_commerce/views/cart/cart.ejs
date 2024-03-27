@@ -17,6 +17,10 @@
               <h5 class="card-title"><%=item.name%></h5>
               <p class="card-text"><%=item.desc%></p>
             </div>
+            <form class="d-inline-block" action="/user/<%=item._id%>?_method=DELETE" method="POST">
+              <button class="mt-4 mx-4 btn btn-danger">Delete</button>
+           </form>
+            
           </div>
         </div>
       </div>

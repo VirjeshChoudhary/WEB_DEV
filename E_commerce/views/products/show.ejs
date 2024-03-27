@@ -67,7 +67,11 @@
                   <%if(review.createdAt){%>
                     <p class="text-muted"> <%=review.createdAt.toDateString()%></p>
                   <%}%>
-                  <button class="btn btn-danger">Delete</button>
+                 <%if(currentUser._id.equals(review.author)){ %>
+                  <form class="d-inline-block" action="/products/<%=review._id%>/<%= foundProduct._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                 </form>
+                <% } %>
                 </div>
               </div>
 
